@@ -1,0 +1,101 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body{
+  background-color: #aaa;
+  min-height: 100vh;
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+}
+
+
+.container{
+  background-color: #ccc;
+  background-color: #eee;
+  font-family: 'Roboto', sans-serif;
+  max-width: 500px;
+  min-width: 500px;
+  padding: 30px;
+  height: 90%;
+  margin: auto;
+  align-self: center;
+}
+
+.top h1{
+  text-align: center;
+  text-decoration: underline;
+  font-size: 30px;
+  color: #6d6d54;
+  color: rgb(155, 147, 51);
+  align-self: center;
+  margin: 0 auto;
+  font-weight: 900;
+  text-shadow: 1px 0px 1px greenyellow;
+}
+
+.login-signup{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px 0;
+  font-weight: 600;
+  padding: 50px;
+  font-size: 20px;
+}
+
+.login-signup .focus{
+  padding: 3px 40px;
+  border-bottom: 3px solid rgb(155, 147, 51);
+  text-shadow: 2px 1px 2px gray;
+}
+
+.login-signup p{
+  cursor: pointer;
+  padding: 3px 40px;
+}
+
+main{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+label{
+  display: block;
+  font-size: 15px;
+  font-weight: 00;
+  color: rgb(52, 39, 39);
+}
+
+input{
+  margin-left: 5px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: #6d6d54;
+  width: 70%;
+  border-bottom: 1px solid rgb(155, 147, 51); 
+}
+
+input:focus{
+  outline: 2px solid rgb(155, 147, 51); 
+
+}
+
+button{
+  width: 30%;
+  align-self: center;
+  background-color: aquamarine;
+  background-color: rgb(52, 39, 39);
+  color:white;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 15px;
+  margin-top: 30px;
+}

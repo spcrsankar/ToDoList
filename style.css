@@ -1,0 +1,253 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+  background-color: #aaa;
+}
+
+
+.container{
+  background-color: #ccc;
+  background-color: #eee;
+  font-family: 'Roboto', sans-serif;
+  max-width: 600px;
+  padding: 30px;
+  margin: auto;
+}
+
+img{
+  width: 30px;
+  height: 30px;
+}
+
+.top{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.top h1{
+  text-align: center;
+  text-decoration: underline;
+  font-size: 30px;
+  color: #6d6d54;
+  color: rgb(155, 147, 51);
+  align-self: center;
+  margin: 0 auto;
+  font-weight: 900;
+  text-shadow: 1px 0px 1px greenyellow;
+}
+
+.top button{
+  background-color: rgb(52, 39, 39);
+  padding: 5px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+#profile{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+header{
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.search-section{
+  display: grid;
+  grid-template-columns: 0.7fr 0.3fr;
+  grid-gap: 10px;
+}
+
+.search-section input{
+  padding: 7px 10px;
+  border: 1px solid #959393;
+  border-radius: 15px;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.search-section button{
+  background-color: rgb(194, 186, 105);
+  background-color: rgb(211, 200, 71);
+  color: white;
+  font-weight: 600;
+  border: none;
+  font-size: 18px;
+  border-radius: 15px;
+}
+
+.calender{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calender .day-date{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+
+}
+
+.date{
+  background-color: rgb(52, 39, 39);
+  padding: 5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  color: #ccc;
+  color:white;
+  text-align: center;
+  border-bottom: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.day{
+  color: rgb(52, 39, 39);
+}
+
+.focus-date .date{
+  background-color: rgb(211, 200, 71);
+  color:white;
+  scale: 1.5;
+}
+
+.focus-date .day{
+  color: rgb(211, 200, 71);
+  text-shadow: 0px 1px 0px rgba(201, 93, 93, 0.2);
+  scale: 1.3;
+}
+
+header p{
+  font-weight: 600;
+  font-size: 18px;
+  font-family: cursive;
+}
+
+main{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #c0bfbf;
+  overflow-y: auto;
+}
+
+.main-heading{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-heading h2{
+  font-size: 20px;
+  font-weight: 500;
+  color: rgb(52, 39, 39);
+  font-family: cursive;
+
+}
+
+.main-heading img{
+  background-color: rgb(211, 200, 71);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.tasks{
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  margin-top: 20px;
+  height: 20%;
+  overflow-y:auto ;
+}
+
+.task{
+  display: grid;
+  grid-template-columns: 0.1fr 0.9fr;
+  grid-gap: 10px;
+  border: 2px solid rgb(179, 178, 178);
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+.task div div{
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  font-size: 14px;
+  justify-content: space-between;
+  padding: 5px;
+  font-weight: 500;
+}
+
+.task div div img{
+  width: 30px;
+  height: 30px;
+}
+
+.task p{
+  display: flex;
+  align-items: center;
+}
+
+
+input[type=checkbox] + label{
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgb(211, 200, 71);
+  border-radius: 2px;
+  cursor: pointer;
+  /* width: 100%;
+  height: 20px;
+  align-self: center;
+  border: 2px solid rgb(211, 200, 71); */
+  /* outline: rgb(211, 200, 71); */
+}
+input[type=checkbox]{
+  position: absolute;
+  opacity: 0;
+} 
+
+input[type=checkbox]:checked + label:after {
+  position: relative;
+  content: '\2714';
+  top:-8px;
+  left: 3px;
+  color: rgb(52, 39, 39);
+  font-size: 18px;
+  font-weight: 100;
+  font-family: cursive;
+  /* transform: rotateX('90'); */
+}
+
+/* input[type=checkbox]:checked {
+  background-color: #00ff00; /* Change background color when checked to green (#00ff00) 
+} */
