@@ -1,0 +1,51 @@
+{% import "macros.html" as macros %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/home.css') }}" />
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="top">
+        <h1>To-Do List</h1>
+        <button onclick=clearHistory()>Logout</button>
+      </div>
+
+      <img src="{{ url_for('static',filename='imgs/profile.jpg') }}" id="profile" />
+      <p>Hi, <span>Sankar</span></p>
+    </header>
+
+    <section class="search-section">
+      <input type="text" name="Search" id="search-text" placeholder="search...">
+      <button id="search">Search</button>
+    </section>
+
+    <main>
+      <div class="main-heading">
+        <h2>Tasks</h2>
+        <img src="{{ url_for('static',filename='imgs/add-logo.svg') }}" alt="add-logo" id="add-logo">
+      </div>
+
+      {% if tasks %}
+        {{ macros.load_task(tasks) }}
+      {% else %}
+        <p class="no-task">No tasks Found</p>
+      {% endif %}
+
+    </main>
+
+  </div>
+
+  {{ macros.add_new_task() }}
+
+  <script src="{{ url_for('static',filename='js/home.js')}}">
+  </script>
+</body>
+
+</html>

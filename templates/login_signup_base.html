@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/login.css')}}" />
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="top">
+        <h1>To-Do List</h1>
+      </div>
+      {% block header %}{% endblock %}
+    </header>
+
+    {% block main %}{% endblock %}
+    
+  </div>
+  <script>
+    window.addEventListener('popstate', function (event) {
+    // Prevent certain actions or handle them as needed
+    event.preventDefault();
+    
+});
+  </script>
+</body>
+
+</html>

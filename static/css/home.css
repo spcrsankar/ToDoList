@@ -22,6 +22,7 @@ body{
 img{
   width: 30px;
   height: 30px;
+  cursor: pointer;
 }
 
 .top{
@@ -107,7 +108,13 @@ header{
   row-gap: 10px;
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
+  transition: transform 4s ease-in;
+}
 
+.calender .day-date:hover:not(.focus-date){
+  transform: scale(1.05);
+  box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.2);
 }
 
 .date{
@@ -215,39 +222,87 @@ main{
 .task p{
   display: flex;
   align-items: center;
-}
-
-
-input[type=checkbox] + label{
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  border: 3px solid rgb(211, 200, 71);
-  border-radius: 2px;
-  cursor: pointer;
-  /* width: 100%;
-  height: 20px;
-  align-self: center;
-  border: 2px solid rgb(211, 200, 71); */
-  /* outline: rgb(211, 200, 71); */
-}
-input[type=checkbox]{
-  position: absolute;
-  opacity: 0;
 } 
 
-input[type=checkbox]:checked + label:after {
-  position: relative;
-  content: '\2714';
-  top:-8px;
-  left: 3px;
-  color: rgb(52, 39, 39);
-  font-size: 18px;
+
+.no-task{
+  text-align: center;
+  font-size: 20px;
   font-weight: 100;
-  font-family: cursive;
-  /* transform: rotateX('90'); */
+  color:red;
 }
 
-/* input[type=checkbox]:checked {
-  background-color: #00ff00; /* Change background color when checked to green (#00ff00) 
-} */
+.new-task-form-div{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #aaa;
+  opacity: 0.93;
+}
+
+.new-task-form h3{
+  font-family: cursive;
+  text-align: center;
+
+}
+.new-task-form{
+  max-width: 400px;
+  min-width: 400px;
+  margin: auto;
+  align-self: center;
+  background-color: #aaa;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  margin-top: 200px;
+}
+
+.new-task-form label{
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.new-task-form input, .new-task-form textarea{
+  margin-left: 5px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: #6d6d54;
+  width: 100%;
+  border-bottom: 1px solid rgb(155, 147, 51); 
+}
+
+.new-task-form input:focus, .new-task-form textarea:focus{
+  outline: 2px solid rgb(155, 147, 51); 
+
+}
+.new-task-form textarea{
+  overflow-y: auto;
+  resize: none;
+}
+
+.buttons{
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.buttons button,.buttons submit{
+  background-color: rgb(155, 147, 51);
+  padding: 5px 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  color:white;
+  transition: transform 0.1s ease-in;
+}
+
+
+.buttons button:hover, .buttons submit:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+  box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2);
+}

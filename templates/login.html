@@ -1,0 +1,26 @@
+{% extends "login_signup_base.html" %}
+
+{% block header %}
+<div class="login-signup">
+  <p class="focus"><a href="{{ url_for('login') }}">Login</a></p>
+  <p><a href="{{ url_for('signup') }}">Signup</a></p>
+</div>
+{% endblock %}
+{% block main %}
+<main>
+  <form action="{{ url_for('login') }}" method="post">
+    <div>
+      <label for="email">Email</label>
+      <input type="text" placeholder="Email ID: abc@xyz.com" name="email" id="email" required/>
+    </div>
+    <div>
+      <label for="password">password</label>
+      <input type="password" placeholder="Password" name="password" id="password" required/>
+    </div>
+    {% if msg %}
+      <p class="msg">*{{msg}}</p>
+    {% endif %}
+    <button id="login">Login</button>
+  </form>
+</main>
+{% endblock %}

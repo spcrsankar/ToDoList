@@ -1,0 +1,49 @@
+{% macro load_task(tasks) %}
+<div class="tasks">
+  {% for task in tasks %}
+    <div class="task" id="{{ task.id }}">
+      <p>
+        <input id="task-{{ task.id }}" type="checkbox" name="iscompleted" class="iscompleted" 
+        {% if task.is_completed %}
+          checked
+        {% endif %}
+      >
+      </p>
+      <div>
+        <div>
+          <p class="time">{{ task.due_date }}</p>
+          <img src="{{ url_for('static',filename='imgs/edit-logo.svg') }}" alt="edit-logo" class="edit edit-logo" id="edit-{{task.id}}">
+        </div>
+        <div>
+          <p class="task-name">
+            {{ task.title }}
+          </p>
+          <img src="{{ url_for('static',filename='imgs/remove-logo.svg') }}" alt="remove-logo" class="logo remove-logo" id="delete-{{task.id}}">
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+
+{% macro add_new_task() %}
+<div class="new-task-form-div"  style="display: none;">
+<form class="new-task-form" action="/add" method="post">
+<h3>Add new Task</h3>
+
+  <label for="title">Title</label>
+  <input type="text" name="title" id="title" placeholder="Title" required>
+  <label for="description">Description</label>
+  <textarea name="description" id="description" cols="30" rows="10" placeholder="Description" required></textarea>
+  <label for="date">Date</label>
+  <input type="date" name="date" id="date">
+  <div class="buttons">
+    <button>Submit</button>
+    <button id="cancel">cancel</button>
+  </div>
+</form>
+</div>
+{% endmacro %}
+
+<!-- -->
