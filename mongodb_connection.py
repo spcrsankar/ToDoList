@@ -6,7 +6,7 @@ def check_user_exists(db, email):
         return True
     return False
 
-def insert_user(db,user_name, password, email):
+def insert_user(db,user_name, password, email, image_base64):
     if check_user_exists(db, email):
         return "Email already registered"
     print('mongodb_connection.py')
@@ -17,6 +17,7 @@ def insert_user(db,user_name, password, email):
         "username": user_name,
         "password": password,
         "email": email,
+        'profile_image': image_base64,
         "no_of_tasks": 0,
         "tasks": []
     })
@@ -82,3 +83,10 @@ def complete_task(db,email,task_id):
         return "Ok"
     print('complete_task error')
     return "Error"
+
+
+def get_profile_image(db,email):
+    user = db.users.find_one({'email': email})
+    print(user)
+    image = user.get('profile_image', '')
+    return image

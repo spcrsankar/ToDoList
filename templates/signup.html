@@ -10,18 +10,22 @@
 
 {% block main %}
 <main>
-  <form action="{{ url_for('signup') }}" method="post">
+  <form action="{{ url_for('signup') }}" method="post" enctype="multipart/form-data">
   <div>
     <label for="email">Name</label>
-    <input type="text" value="{{ username }}"" placeholder="Jhon Doe" name="username" id="name" />
+    <input type="text" value="{{ username }}"" placeholder="Jhon Doe" name="username" id="name" required/>
   </div>
   <div>
     <label for="email">Email</label>
-    <input type="text" value="{{ email }}" placeholder="Email ID: abc@xyz.com" name="email" id="email" />
+    <input type="text" value="{{ email }}" placeholder="Email ID: abc@xyz.com" name="email" id="email" required/>
+  </div>
+  <div>
+    <label for="profile">profile</label>
+    <input type="file" name="profile" accept="image/*" id="profile" placeholder="profile" required>
   </div>
   <div>
     <label for="password">password</label>
-    <input type="password" value="{{ password }}" placeholder="Password" name="password" id="password" />
+    <input type="password" value="{{ password }}" placeholder="Password" name="password" id="password" required/>
   </div>
   {% if msg %}
     <p class="msg">*{{msg}}</p>

@@ -1,4 +1,4 @@
-from flask import Flask, session, render_template, request, redirect, url_for, jsonify
+from flask import Flask, session, render_template, request, redirect, url_for, jsonify, Response
 from validation import signup_validation, login_validation
 import hashlib
 import mongodb_connection
@@ -6,6 +6,8 @@ from datetime import datetime
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
+import base64
+
 
 load_dotenv()
 
@@ -61,9 +63,22 @@ def create_app():
       return render_template('login.html')
 
 
-  @app.route('/signup', methods=['GET', 'POST'])
+  @app.route('/signup/', methods=['GET', 'POST'])
   def signup():
       if request.method == 'POST':
+          print('post request',request.files)
+          #get image and convert to base64
+          if('profile' in request.files):
+             print('file is there')
+          else:
+            print('file is not there')
+          file = request.files['profile']
+
+          print('file is collected')
+          image_binary = file.read()
+          image_base64 = base64.b64encode(image_binary).decode('utf-8')
+          print('image is converted')
+          
           #get all data
           user_name = request.form['username']
           password = request.form['password']
@@ -75,24 +90,45 @@ def create_app():
           #if valid
           if msg == "Ok":
             #check with database
-            msg = mongodb_connection.insert_user(app.db,user_name, password, email)
+            msg = mongodb_connection.insert_user(app.db,user_name, password, email, image_base64)
 
             if(msg == "Ok"):
               session['username'] = user_name
+              session['email'] = email
               return redirect(url_for('login'))
               
-          return render_template('signup.html',msg=msg,username=user_name,email=email,password=password)
+          return render_template('signup.html',msg=msg,username=user_name,email=email,password=password,profile_image=image_base64)
       
       return render_template('signup.html',msg="")
 
   @app.route('/home/')
   def home():
       if 'username' in session:
+        print(session['email'],session['username'])
+        profile_image = mongodb_connection.get_profile_image(app.db,session['email'])
+
         #get tasks from database
         tasks = mongodb_connection.get_tasks(app.db,session['email'])  
         return render_template('home.html',username=session['username'],tasks=tasks)
       return redirect(url_for('login'))
 
+  #to get current users profile image
+  @app.route('/profile-image/')
+  def profile_image():
+    image_data = mongodb_connection.get_profile_image(app.db,session['email'])  
+
+    if image_data:
+        # Decode the base64-encoded image data
+        image_base64 = image_data
+        image_binary = base64.b64decode(image_base64)
+
+        # Create a response with the image binary data
+        response = Response(image_binary, content_type='image/jpeg')  # You can adjust the content type based on your image type
+
+        return response
+
+    else:
+        return redirect(url_for('login'))
 
   @app.route('/logout/')
   def logout():

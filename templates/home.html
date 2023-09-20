@@ -17,8 +17,8 @@
         <button onclick=clearHistory()>Logout</button>
       </div>
 
-      <img src="{{ url_for('static',filename='imgs/profile.jpg') }}" id="profile" />
-      <p>Hi, <span>Sankar</span></p>
+      <img src="{{ url_for('profile_image') }}" id="profile" />
+      <p>Hi, <span>{{ username }}</span></p>
     </header>
 
     <section class="search-section">
