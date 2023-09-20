@@ -16,7 +16,7 @@ window.onload = function() {
         .then(function(response) {
         if (response.ok) {
           console.log('Task updated');
-          window.history.replaceState(null, null, '/logout');
+          window.history.replaceState(null, null, '/home');
           return;
         }
         throw new Error('Request failed.');
@@ -63,7 +63,7 @@ window.onload = function() {
       document.querySelector('.new-task-form-div').style.display = 'none';
       document.querySelector('.view-task-div-div').style.display = 'none';
       document.querySelector('.edit-task-form-div').style.display = 'none';
-      window.history.replaceState(null, null, '/logout');
+      window.history.replaceState(null, null, '/home');
     });
   });
 
@@ -88,7 +88,7 @@ window.onload = function() {
           console.log(element.id, data.includes(parseInt(element.id)))
           if(data.includes(parseInt(element.id))){
             element.style.display = 'grid';
-            window.history.replaceState(null, null, '/logout');
+            window.history.replaceState(null, null, '/home');
           }
           else{
             element.style.display = 'none';
@@ -128,6 +128,12 @@ window.onload = function() {
     });
   });
 
+
+  //select all form to avoid back button
+  document.querySelector('form').addEventListener('submit', function(e) {
+    window.history.replaceState(null, null, '/home');
+    e.preventDefault();
+  });
 }
 
 
