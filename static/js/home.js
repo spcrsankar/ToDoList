@@ -1,4 +1,10 @@
+async function get_data(id) {
+  const url = '/get_task/' + id + '/';
 
+  const response = await fetch(url)
+  const data = await response.json()
+  return data
+}
 
 window.onload = function() {
   const tasks = document.querySelectorAll("input[type='checkbox']")
@@ -10,6 +16,7 @@ window.onload = function() {
         .then(function(response) {
         if (response.ok) {
           console.log('Task updated');
+          window.history.replaceState(null, null, '/logout');
           return;
         }
         throw new Error('Request failed.');
@@ -33,6 +40,7 @@ window.onload = function() {
         if (response.ok) {
           console.log('Task deleted');
           document.getElementById(id).remove();
+          window.history.replaceState(null, null, '/home'); //
           return;
         }
         throw new Error('Request failed.');
@@ -47,13 +55,19 @@ window.onload = function() {
     document.querySelector('.new-task-form-div').style.display = 'flex';
   });
 
-  document.getElementById('cancel').addEventListener('click', function(e) {
-    e.preventDefault();
-    console.log("dsjfjsdl")
-    document.querySelector('.new-task-form-div').style.display = 'none';
+  const cancel_buttons = document.querySelectorAll('.cancel');
+  cancel_buttons.forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log("dsjfjsdl")
+      document.querySelector('.new-task-form-div').style.display = 'none';
+      document.querySelector('.view-task-div-div').style.display = 'none';
+      document.querySelector('.edit-task-form-div').style.display = 'none';
+      window.history.replaceState(null, null, '/logout');
+    });
   });
 
-  
+
   document.querySelector('#search').addEventListener('click', function(e) {
     let search_text = document.querySelector('#search-text').value;
     console.log("searching")
@@ -74,6 +88,7 @@ window.onload = function() {
           console.log(element.id, data.includes(parseInt(element.id)))
           if(data.includes(parseInt(element.id))){
             element.style.display = 'grid';
+            window.history.replaceState(null, null, '/logout');
           }
           else{
             element.style.display = 'none';
@@ -82,6 +97,35 @@ window.onload = function() {
       });
     
     
+  });
+
+  //view edit page
+  document.querySelectorAll('.edit-logo').forEach(element => {
+    element.addEventListener('click', async function() {
+      const id = this.id.split('-')[1];
+      document.querySelector('.edit-task-form-div').style.display = 'flex';
+      document.querySelector('.edit-task-form-div').style.display = 'flex';
+      document.querySelector('.edit-task-form').action = '/update/' + id + '/';
+      const data = await get_data(id);
+      document.querySelector('#edit-title').value = data.title;
+      document.querySelector('#edit-description').value = data.description;
+      document.querySelector('#edit-date').value = data.due_date;
+    });
+  })
+
+
+  //view page
+  document.querySelectorAll('.view-logo').forEach(element => {
+    element.addEventListener('click', async function() {
+      const id = this.id.split('-')[1];
+      const data = await get_data(id);
+      console.log(data)
+      document.querySelector('.view-task-div-div').style.display = 'flex';
+
+      document.querySelector('#view-title').innerHTML = data.title;
+      document.querySelector('#view-description').innerHTML = data.description;
+      document.querySelector('#view-date').innerHTML = data.due_date;
+    });
   });
 
 }
@@ -93,3 +137,8 @@ function clearHistory() {
   window.location.replace('/logout'); // Redirect to the logout page
   window.history.replaceState(null, null, '/logout'); // Replace the current history state with the logout page
 }
+
+history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };

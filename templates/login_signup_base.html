@@ -26,6 +26,15 @@
     event.preventDefault();
     
 });
+  document.querySelector("#login-form").addEventListener("submit", function (e) {
+    console.log("login clicked")
+    window.history.replaceState(null, null, '/login');
+
+  });
+  history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
   </script>
 </body>
 

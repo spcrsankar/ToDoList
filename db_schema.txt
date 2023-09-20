@@ -1,0 +1,25 @@
+{
+	user:
+	email:
+	password:
+	todos:[
+		{
+			id:
+			title:
+			description:
+			due_date:
+			is_completed:
+		},
+		
+		{
+			id:
+			title:
+			description:
+			due_date:
+			is_completed:
+		},
+		......
+....
+
+	]
+}

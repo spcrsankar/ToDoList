@@ -6,6 +6,10 @@ from datetime import datetime
 app = Flask(__name__)
 app.secret_key = ' jsdnfkhvfhf83sfjv'
 
+def reverse_format(date):
+    date_obj = datetime.strptime(date, "%b %d")
+    formatted_date = date_obj.strftime("%Y-%m-%d")
+    return formatted_date
 
 def date_format(date):
   print(date+"date")
@@ -154,7 +158,7 @@ def add():
 
 @app.route('/search/<string:search_text>/')
 def search(search_text):
-   if 'username' in session:
+    if 'username' in session:
       print(search_text)
       search_text = search_text.lower()
       search_result = []
@@ -163,3 +167,33 @@ def search(search_text):
           search_result.append(task['id'])
       print(search_result)
       return jsonify(search_result)
+   
+    return redirect(url_for('login'))
+
+@app.route('/get_task/<int:task_id>/')
+def get_task(task_id):
+    if 'username' in session:
+      for task in tasks:
+        if task['id'] == task_id:
+          temp = task.copy()
+          temp['due_date'] = reverse_format(temp['due_date'])
+          
+          return jsonify(temp)
+    return redirect(url_for('login'))
+
+@app.route('/update/<int:task_id>/', methods=['POST'])
+def update(task_id):
+    if 'username' in session:
+      title = request.form['title']
+      description = request.form['description']
+      date = request.form['date']
+      date = date_format(date)
+      print(title, description)
+      for task in tasks:
+        if task['id'] == task_id:
+          task['title'] = title
+          task['description'] = description
+          task['due_date'] = date
+      print(tasks)
+      return redirect(url_for('home'))
+    return redirect(url_for('login'))
