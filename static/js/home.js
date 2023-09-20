@@ -132,7 +132,6 @@ window.onload = function() {
   //select all form to avoid back button
   document.querySelector('form').addEventListener('submit', function(e) {
     window.history.replaceState(null, null, '/home');
-    e.preventDefault();
   });
 }
 

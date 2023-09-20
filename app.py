@@ -33,6 +33,9 @@ def create_app():
     formatted_date = date_obj.strftime("%b %d")
     return formatted_date
 
+  @app.errorhandler(404)
+  def page_not_found(e):
+    return render_template('404.html'), 404
 
   @app.route('/',methods=['GET','POST'])
   def login():
